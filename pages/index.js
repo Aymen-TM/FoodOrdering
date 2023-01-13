@@ -2,12 +2,16 @@ import Head from 'next/head'
 import Layout from '../components/Layout'
 import { Poppins } from '@next/font/google'
 import Featured from '../components/Featured'
+import PizzaList from '../components/PizzaList'
 
 
 
 const inter = Poppins({ subsets: ['latin'],weight:"400" })
 
+
+
 export default function Home() {
+  
   return (
     <>
       <Head>
@@ -18,6 +22,7 @@ export default function Home() {
       </Head>
       <Layout>
         <Featured />
+        <PizzaList />
       </Layout>
       
     </>

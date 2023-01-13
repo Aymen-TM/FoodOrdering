@@ -15,11 +15,14 @@ const NavBar = () => {
         alignItems:"center",
         padding:"0 50px",
         height:"100px",
+        position:"sticky",
+        top:0,
+        zIndex:'999',
         bgcolor:theme.palette.primary.main
        }}>
       <Box display={"flex"}  alignItems={"center"} flex={{md:1}} gap={2}>
         <Box display={"flex"} justifyContent={"center"} alignItems={"center"} height={48} width={48} borderRadius={"999999px"} bgcolor={theme.palette.background.default}>
-          <Image src={telephone} height={"32"} width={"32"} />
+          <Image src={telephone} alt='phone' height={"32"} width={"32"} />
         </Box>
         <Stack gap={0.5}>
           <Typography variant='p' fontWeight={"semibold"} fontSize={"15px"} color={"white"} textTransform={"uppercase"}>order now!</Typography>
@@ -32,7 +35,7 @@ const NavBar = () => {
         <NavBarLink title={"Products"} />
         <NavBarLink title={"Menu"} />
           <Box>
-            <Image src={logo} height={72} />
+            <Image src={logo} height={72} alt='logo' />
           </Box>
           <NavBarLink title={"Events"} />
           <NavBarLink title={"Blog"} />

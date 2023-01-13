@@ -4,6 +4,7 @@ import React from 'react'
 import {logo, telephone} from '../public/img/index'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Container } from '@mui/system';
+import NavBarLink from './NavBarLink';
 
 const NavBar = () => {
   const isNotMobileScreen = useMediaQuery("(min-width:1000px)")
@@ -27,15 +28,15 @@ const NavBar = () => {
       </Box>
       {isNotMobileScreen &&
       <Stack flex={1} flexDirection={"row"} alignItems={"center"}  >
-        <Button  color={"secondary"} variant="text"><Typography fontWeight={"bold"} variant='h6'>Home</Typography></Button>
-        <Button color={"secondary"} variant="text"><Typography fontWeight={"bold"} variant='h6'>Products</Typography></Button>
-        <Button color={"secondary"} variant="text"><Typography fontWeight={"bold"} variant='h6'>Menu</Typography></Button>
+        <NavBarLink title={"Home"} />
+        <NavBarLink title={"Products"} />
+        <NavBarLink title={"Menu"} />
           <Box>
             <Image src={logo} height={72} />
           </Box>
-        <Button color={"secondary"} variant="text"><Typography fontWeight={"bold"} variant='h6'>Events</Typography></Button>
-        <Button color={"secondary"} variant="text"><Typography fontWeight={"bold"} variant='h6'>Blog</Typography></Button>
-        <Button color={"secondary"} variant="text"><Typography fontWeight={"bold"} variant='h6'>Contact</Typography></Button>
+          <NavBarLink title={"Events"} />
+          <NavBarLink title={"Blog"} />
+          <NavBarLink title={"Contact"} />
       </Stack>
       }
 

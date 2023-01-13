@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Layout from '../components/Layout'
 import { Poppins } from '@next/font/google'
+import Featured from '../components/Featured'
 
 
 
@@ -16,7 +17,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        
+        <Featured />
       </Layout>
       
     </>

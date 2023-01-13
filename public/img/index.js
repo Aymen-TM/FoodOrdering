@@ -11,6 +11,8 @@ import paid from '../img/paid.png'
 import pizza from '../img/pizza.png'
 import size from '../img/size.png'
 import telephone from '../img/telephone.png'
+import pizza1 from '../img/pizza-1.jpg'
+import pizza2 from '../img/pizza-2.jpg'
 
 
 export {
@@ -24,6 +26,6 @@ export {
     delivered,
     paid,
     logo,
-    bg,cart,checked
+    bg,cart,checked,pizza1,pizza2
 }
 

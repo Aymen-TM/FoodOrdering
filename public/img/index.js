@@ -9,7 +9,7 @@ import delivered from '../img/delivered.png'
 import logo from '../img/logo.png'
 import paid from '../img/paid.png'
 import pizza from '../img/pizza.png'
-import size from '../img/size.png'
+import PizzaSize from '../img/size.png'
 import telephone from '../img/telephone.png'
 import pizza1 from '../img/pizza-1.jpg'
 import pizza2 from '../img/pizza-2.jpg'
@@ -21,7 +21,7 @@ export {
     pizza,
     bike,
     bake,
-    size,
+    PizzaSize,
     telephone,
     delivered,
     paid,

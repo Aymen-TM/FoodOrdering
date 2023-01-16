@@ -24,7 +24,7 @@ const Featured = () => {
         height:"calc(100vh - 100px)",
         position:"relative",
        }}>
-        <Box onClick={()=>handleClick()}  sx={{cursor:"pointer"}} zIndex={2} position={"absolute"} top={0} bottom={0} left={0} margin={"auto"} height={"20%"} width={"10%"}>
+        <Box  height={"20%"} width={"10%"} position={"absolute"} top={0} bottom={0} left={0} zIndex={2}  margin={"auto"} sx={{cursor:"pointer"}} onClick={()=>handleClick()}   >
             <Image src={arrowL} fill style={{objectFit:"contain"}}  alt='arrowLeft'  />
         </Box>
 

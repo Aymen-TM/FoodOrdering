@@ -62,14 +62,10 @@ h4: {
 fontFamily: ["Poppins", "sans-serif"].join(","),
 fontSize: 20,
 },
-h5: {
+p:{
 fontFamily: ["Poppins", "sans-serif"].join(","),
-fontSize: 16,
-},
-h6: {
-fontFamily: ["Poppins", "sans-serif"].join(","),
-fontSize: 14,
-},
+fontSize: 18,
+}
 },
 });
 

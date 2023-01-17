@@ -4,7 +4,7 @@ import { PizzaListContainer } from '../styles/Styled'
 
 import PizzaCard from './PizzaCard'
 
-const PizzaList = () => {
+const PizzaList = ({pizzaList}) => {
     const theme = useTheme()
   return (
     <PizzaListContainer>
@@ -14,14 +14,11 @@ const PizzaList = () => {
         sit amet, consectetur adipiscing elit.</Typography>
 
         <Box display={"flex"} gap={5}  justifyContent={"space-between"} alignItems={"center"} flexWrap={"wrap"} >
-          <PizzaCard />
-          <PizzaCard />
-          <PizzaCard />
-          <PizzaCard />
-          <PizzaCard />
-          <PizzaCard />
-          <PizzaCard />
-          <PizzaCard />
+          {
+            pizzaList.map((pizza)=>(
+              <PizzaCard key={pizza._id} pizza={pizza} />
+            ))
+          }
         </Box>
     </PizzaListContainer>
   )

@@ -1,8 +1,8 @@
 import Head from 'next/head'
-import Layout from '../components/Layout'
 import { Poppins } from '@next/font/google'
 import Featured from '../components/Featured'
 import PizzaList from '../components/PizzaList'
+import axios from 'axios'
 
 
 
@@ -10,7 +10,10 @@ const inter = Poppins({ subsets: ['latin'],weight:"400" })
 
 
 
-export default function Home() {
+export default function Home({pizzaList}) {
+
+
+  
   
   return (
     <div>
@@ -21,7 +24,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head> 
       <Featured />
-      <PizzaList />    
+      <PizzaList pizzaList={pizzaList} />  
     </div>
   )
+}
+
+export const getServerSideProps = async ()=>{
+  const response = await axios.get("http://localhost:3000/api/products")
+  return{
+    props:{
+      pizzaList:response.data,
+    }
+  }
 }

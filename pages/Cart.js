@@ -3,68 +3,55 @@ import React from 'react'
 import Paper from '@mui/material'
 import { pizza } from '../public/img/index'
 import Image from 'next/image'
+import { useSelector } from 'react-redux'
+
+
 const Cart = () => {
     const theme = useTheme()
+    const products = useSelector((state)=>state.cart.products)
+    const total = useSelector((state)=>state.cart.total)
+
+    const tableHead =["Product","Name","Extras","Price","Quantity","Total"]
+ 
   return (
     <Box display={"flex"} flexDirection={{xs:"column",md:"row"}} padding={"50px"}>
         <Box flex={2}>
             <TableContainer component={Paper}  >
                 <Table sx={{ minWidth: 650 }} size="small" aria-label="simple table">
-                    <TableHead>
+                    <TableHead >
                     <TableRow>
-                        <TableCell>Product</TableCell>
-                        <TableCell align="left">Name</TableCell>
-                        <TableCell align="left">Extras</TableCell>
-                        <TableCell align="left">Price</TableCell>
-                        <TableCell align="left">Quantity</TableCell>
-                        <TableCell align="left">Total</TableCell>
+                        {
+                         tableHead.map((title)=><TableCell align="left" sx={{fontWeight:"bold" ,fontSize:"16px"}}>{title}</TableCell>)
+                        }
                     </TableRow>
                     </TableHead>
                     <TableBody>
-                        <TableRow >
+                        {
+                        products.map((item)=>(
+                            <TableRow >
                             <TableCell >
                                 <Box position={"relative"} height={"100px"} width={"100px"}>
-                                    <Image src={pizza}  fill style={{objectFit:"contain"}} alt="pizza" />
+                                    <Image src={item.img}  fill style={{objectFit:"contain"}} alt="pizza" />
                                 </Box>
                             </TableCell>
                             <TableCell align="left" >
-                                CORALZO
+                                {`${item.title}`}
                             </TableCell>
                             <TableCell align="left" >
-                            Double ingredient, spicy sauce
+                            {item.options.map((option)=><Typography>{option.text}</Typography> )}
                             </TableCell>
                             <TableCell align="left" >
-                                $19.90
+                            {item.price}
                             </TableCell>
                             <TableCell align="left">
-                                2
+                            {item.quantity}
                             </TableCell>
                             <TableCell align="left">
-                            $39.80
+                            {item.totalPrice}
                             </TableCell>
                         </TableRow>
-                        <TableRow >
-                            <TableCell >
-                                <Box position={"relative"} height={"100px"} width={"100px"}>
-                                    <Image src={pizza}  fill style={{objectFit:"contain"}} alt="pizza" />
-                                </Box>
-                            </TableCell>
-                            <TableCell align="left" >
-                                CORALZO
-                            </TableCell>
-                            <TableCell align="left" >
-                            Double ingredient, spicy sauce
-                            </TableCell>
-                            <TableCell align="left" >
-                                $19.90
-                            </TableCell>
-                            <TableCell align="left">
-                                2
-                            </TableCell>
-                            <TableCell align="left">
-                            $39.80
-                            </TableCell>
-                        </TableRow>
+                        ))
+                        }
                         
                     </TableBody>
                 </Table>
@@ -82,7 +69,7 @@ const Cart = () => {
                         <Typography variant='body1' color={"white"}>Discount: $0.00</Typography>
                     </Box>
                     <Box>
-                        <Typography variant='body1' color={"white"}>Total: $79.60</Typography>
+                        <Typography variant='body1' color={"white"}>Total: ${total}</Typography>
                     </Box>
                 </Box>
                 <Button variant='contained' disableElevation >CHECKOUT NOW!</Button>

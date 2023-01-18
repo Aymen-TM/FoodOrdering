@@ -4,6 +4,8 @@ import { theme } from "../utils/theme";
 import createEmotionCache from "../utils/createEmotionCache";
 import { CacheProvider } from "@emotion/react";
 import Layout from "../components/Layout";
+import { Provider } from "react-redux";
+import store from "../redux/store"
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -15,9 +17,11 @@ function MyApp({
   return (
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={theme}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <Provider store={store}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </Provider>
       </ThemeProvider>
     </CacheProvider>
   );

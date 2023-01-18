@@ -45,7 +45,7 @@ export const theme = createTheme({
 },
 typography: {
 fontFamily: ["Poppins", "sans-serif"].join(","),
-fontSize: 12,
+fontSize: 10,
 h1: {
 fontFamily: ["Poppins", "sans-serif"].join(","),
 fontSize: 40,

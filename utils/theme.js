@@ -20,6 +20,9 @@ export const colorTokens = {
   primary: {
     500:"#d3401f"
   },
+  secondary:{
+    500:"#1DEFFF"
+  }
 };
 
 export const theme = createTheme({
@@ -27,16 +30,20 @@ export const theme = createTheme({
     // palette values for light mode
     primary: {
       main: colorTokens.primary[500],
+      light:colorTokens.secondary[500]
     },
     secondary:{
-      main:colorTokens.grey[0]
+      main: colorTokens.secondary[500],
     },
     neutral: {
       dark: colorTokens.grey[700],
-      main: colorTokens.grey[500],
+      main: colorTokens.grey[0],
       mediumMain: colorTokens.grey[400],
       medium: colorTokens.grey[300],
       light: colorTokens.grey[50],
+    },
+    info:{
+      main:colorTokens.grey[800]
     },
     background: {
       default: colorTokens.grey[10],
@@ -45,26 +52,26 @@ export const theme = createTheme({
 },
 typography: {
 fontFamily: ["Poppins", "sans-serif"].join(","),
-fontSize: 10,
+fontSize: "1rem",
 h1: {
 fontFamily: ["Poppins", "sans-serif"].join(","),
-fontSize: 40,
+fontSize: "2.5rem",
 },
 h2: {
 fontFamily: ["Poppins", "sans-serif"].join(","),
-fontSize: 32,
+fontSize: "2rem",
 },
 h3: {
 fontFamily: ["Poppins", "sans-serif"].join(","),
-fontSize: 24,
+fontSize: "1.5rem",
 },
 h4: {
 fontFamily: ["Poppins", "sans-serif"].join(","),
-fontSize: 20,
+fontSize: "1rem",
 },
 p:{
 fontFamily: ["Poppins", "sans-serif"].join(","),
-fontSize: 18,
+fontSize: "1.125rem",
 }
 },
 });

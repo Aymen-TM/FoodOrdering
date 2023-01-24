@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import { ThemeProvider } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../utils/theme";
 import createEmotionCache from "../utils/createEmotionCache";
 import { CacheProvider } from "@emotion/react";

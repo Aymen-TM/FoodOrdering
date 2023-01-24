@@ -9,8 +9,8 @@ const CartButton = ({quantity}) => {
   return (
       <Link href={"http://localhost:3000/Cart"}>
         <IconButton >
-          <Badge badgeContent={<Typography color={theme.palette.primary.main} fontWeight={"bold"} variant='h6'>{quantity}</Typography>} variant="standard" color='secondary'  overlap="circular">
-          <ShoppingCartOutlinedIcon sx={{height:40,width:40}} color='secondary'  />
+          <Badge badgeContent={<Typography color={"primary"} fontWeight={"bold"} variant='h4'>{quantity}</Typography>} variant="standard" color='neutral'  overlap="circular">
+          <ShoppingCartOutlinedIcon sx={{height:40,width:40}} color='neutral'  />
           </Badge>
         </IconButton>
       </Link>

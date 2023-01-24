@@ -8,12 +8,12 @@ const Status = ({img,stat,status}) => {
     <StatusContainer status={status}  flexDirection={"column"} alignItems={"center"} gap={1}>
         <Image src={img} width={30} height={30} />
         <span>{stat}</span>
-        <Image
+        {status === 'undone'||status==='inProgress'?" ":<Image
                 src={checked}
                 width={20}
                 height={20}
                 alt=""
-              />
+              />}
     </StatusContainer>
   )
 }

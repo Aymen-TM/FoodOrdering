@@ -17,7 +17,9 @@ const cartSlice = createSlice({
             state.total = state.products.reduce((accumulator, currentValue) => accumulator + currentValue.totalPrice,0)
         },
         reset:(state)=>{
-            state = initialState
+            state.products = []
+            state.orderQuantity =0
+            state.total = 0
         }
     }
 })

@@ -3,7 +3,7 @@ import React from 'react'
 
 const NavBarLink = ({title}) => {
   return (
-    <Button color={"secondary"} variant="text"><Typography fontWeight={"bold"} variant='h6'>{title}</Typography></Button>
+    <Button color={"neutral"} variant="text"><Typography fontWeight={"bold"} variant='h4'>{title}</Typography></Button>
   )
 }
 

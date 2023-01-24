@@ -3,12 +3,13 @@ import React from 'react'
 import Paper from '@mui/material'
 import Status from '../../components/Status'
 import { paid,delivered,bake,bike } from '../../public/img/index'
+import axios from 'axios'
 
 
-const Order = () => {
+const Order = ({order}) => {
     const statData = [{img:paid,title:"Payment"},{img:bake,title:"Preparing"},{img:bike,title:"on the way"},{img:delivered,title:"Delivered"}]
     const theme = useTheme()
-    const status = 0;
+    const status = order.status;
 
     const statusClass = (index) => {
       if (index - status < 1) return "done";
@@ -31,16 +32,16 @@ const Order = () => {
                     <TableBody>
                         <TableRow >
                             <TableCell >
-                            129837819237
+                            {order._id}
                             </TableCell>
                             <TableCell align="left" >
-                            John Doe
+                            {order.customer}
                             </TableCell>
                             <TableCell align="left" >
-                            Elton st. 212-33 LA
+                            {order.address}
                             </TableCell>
                             <TableCell align="left" >
-                            $79.80
+                            {order.total}
                             </TableCell>
                         </TableRow>
                         
@@ -77,6 +78,15 @@ const Order = () => {
         </Box>
     </Box>
   )
+}
+
+export const getServerSideProps = async ({params})=>{
+    const response = await axios.get(`http://localhost:3000/api/orders/${params.id}`)
+    return{
+      props:{
+        order:response.data,
+      } 
+    }
 }
 
 

@@ -17,7 +17,23 @@ export default async function handler(req,res) {
     }
 
     if(method === "DELETE"){
-
+        try {
+            const pizza = await Product.findByIdAndDelete(id)
+            
+            res.status(200).json(pizza)
+            res.status(200).json({
+                success: true,
+                message: 'Document deleted successfully',
+                pizza
+              });
+              
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                message: 'Error deleting document',
+                error: err
+              });
+        }
     }
 
     if(method === "POST"){

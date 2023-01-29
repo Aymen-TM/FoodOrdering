@@ -6,7 +6,7 @@ import Image from 'next/image'
 
 const index = ({products,oreders}) => {
 
-    const status = ["preparing", "on the way", "delivered"];
+    const status = ["preparing", "on the way", "delivered","done"];
     const [nav, setNav] = useState('Products')
     const [pizzaList, setPizzaList] = useState(products)
     const [ordersList, setOrdersList] = useState(oreders)
@@ -100,7 +100,7 @@ const index = ({products,oreders}) => {
                                 </TableCell>
                                 <TableCell align="right" >
                                     <Button  size="small" variant='contained' color='success'>Edit</Button>
-                                    <Button  size="small" sx={{ml:1}} variant='contained' color='error' onClick={()=>handleDelete(pizza._id)}>Delete</Button>
+                                    <Button  size="small" sx={{ml:1}} variant='contained' color='error' onClick={()=>handleDeleteProduct(pizza._id)}>Delete</Button>
                                 </TableCell>
                                 </TableRow>
                                 ))
@@ -131,7 +131,17 @@ const index = ({products,oreders}) => {
   )
 }
 
-export const getServerSideProps = async ()=>{
+export const getServerSideProps = async (ctx)=>{
+    const myCookie = ctx.req?.cookies || ""
+    if(myCookie.token !== process.env.TOKEN){
+      return{
+        redirect:{
+          destination:"/admin/login",
+          permanant:false
+        }
+      }
+    }
+
     const allProductResponse = await axios.get(`http://localhost:3000/api/products`)
     const allOredersResponse = await axios.get(`http://localhost:3000/api/orders`)
     return{

@@ -31,7 +31,7 @@ export default async function handler(req,res) {
             res.status(500).json({
                 success: false,
                 message: 'Error deleting document',
-                error: err
+                error: error
               });
         }
     }

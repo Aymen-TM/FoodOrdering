@@ -1,12 +1,11 @@
-import {Box ,Stack, Typography, useMediaQuery, useTheme } from '@mui/material'
-import Image from 'next/image'
+import {Box ,Button,Link,Stack, Typography, useMediaQuery, useTheme } from '@mui/material'
 import React from 'react'
-import {logo, telephone} from '../public/img/index'
-import NavBarLink from './NavBarLink';
-import { NavBarContainer } from '../styles/Styled';
-import CartButton from './CartButton';
-import CircleImage from './CircleImage';
+import {telephone} from '../../public/img/index'
+import { NavBarContainer } from '../../styles/Styled';
+import CartButton from '../CartButton';
+import CircleImage from '../CircleImage';
 import {useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 
 
 
@@ -14,9 +13,8 @@ const NavBar = () => {
   const isNotMobileScreen = useMediaQuery("(min-width:1000px)")
   const theme = useTheme()
   const orderQuantity = useSelector((state)=>state.cart.orderQuantity)
-
-
-
+  const router = useRouter()
+  
   return (
        <NavBarContainer bg={theme.palette.primary.main}>
         
@@ -30,15 +28,10 @@ const NavBar = () => {
 
       {isNotMobileScreen &&
       <Stack flex={3} flexDirection={"row"} alignItems={"center"}  >
-        <NavBarLink title={"Home"} />
-        <NavBarLink title={"Products"} />
-        <NavBarLink title={"Menu"} />
-          <Box>
-            <Image src={logo} height={72} alt='logo' />
-          </Box>
-          <NavBarLink title={"Events"} />
-          <NavBarLink title={"Blog"} />
-          <NavBarLink title={"Contact"} />
+        <Button color={"neutral"} sx={{fontSize:"20px"}} onClick={()=>router.push('/')} >Home</Button>
+        <Button color={"neutral"} sx={{fontSize:"20px"}} onClick={()=>router.push('/')} >Menu</Button>
+        <Button color={"neutral"} sx={{fontSize:"20px"}} onClick={()=>router.push('/')} >Contact</Button>
+
       </Stack>
       }
 

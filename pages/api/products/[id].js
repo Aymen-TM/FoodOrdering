@@ -12,7 +12,24 @@ export default async function handler(req,res) {
         res.status(200).json(pizza)
     }
 
-    if(method === "PUT"){
+    if(method === "PATCH"){
+     try{
+        const pizza = await Product.findByIdAndUpdate(id,req.body)
+            
+        res.status(200).json(pizza)
+        res.status(200).json({
+            success: true,
+            message: 'Document deleted successfully',
+            pizza
+          });
+          
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Error deleting document',
+            error: error
+          });
+    }
 
     }
 

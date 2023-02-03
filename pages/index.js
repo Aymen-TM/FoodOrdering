@@ -1,9 +1,8 @@
 import Head from 'next/head'
 import { Poppins } from '@next/font/google'
-import Featured from '../components/Featured'
-import PizzaList from '../components/PizzaList'
+import Featured from '../components/sections/Featured'
+import PizzaList from '../components/sections/PizzaList'
 import axios from 'axios'
-
 
 
 const inter = Poppins({ subsets: ['latin'],weight:"400" })

@@ -3,7 +3,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../utils/theme";
 import createEmotionCache from "../utils/createEmotionCache";
 import { CacheProvider } from "@emotion/react";
-import Layout from "../components/Layout";
+import Layout from "../components/sections/Layout";
 import { Provider } from "react-redux";
 import store from "../redux/store"
 

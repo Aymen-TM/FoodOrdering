@@ -3,16 +3,27 @@ import React, { useState } from 'react'
 import Paper, { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import axios from 'axios'
 import Image from 'next/image'
+import AddProductModal from '../../components/modals/AddProductModal'
 
 const index = ({products,oreders}) => {
 
+    const [close, setClose] = useState(false)
     const status = ["preparing", "on the way", "delivered","done"];
     const [nav, setNav] = useState('Products')
     const [pizzaList, setPizzaList] = useState(products)
     const [ordersList, setOrdersList] = useState(oreders)
+    const [action, setAction] = useState("")
+    const [pizza_Id_To_Update, setPizza_Id_To_Update] = useState(null)
+    const [pizza_index_To_Update, setPizza_index_To_Update] = useState(null)
+
+
 
     const handleNav =(nav)=>{
-        setNav(nav)
+        if(nav === 'Products'){
+          setNav('Orders') 
+        }else{
+          setNav('Products')
+        }
     }
 
     const handleDeleteProduct = async (id) => {
@@ -24,6 +35,12 @@ const index = ({products,oreders}) => {
         } catch (err) {
           console.log(err);
         }
+      };
+      const getUpdatedPizzaID = async (id,index,action) => {
+        setAction(action)
+        setPizza_Id_To_Update(id)
+        setPizza_index_To_Update(index)
+        setClose(!close)
       };
       const handleDeleteOrder = async (id) => {
         try {
@@ -62,16 +79,18 @@ const index = ({products,oreders}) => {
       
 
   return (
-    <Box display={"flex"} flexDirection={"column"} alignItems={"center"} padding='30px 50px'>
-        <Box display={"flex"} justifyContent="space-evenly" width={"100%"}>
-            <Button variant='contained' color='info' size='large' onClick={()=>handleNav("Products")}>Products</Button>
-            <Button variant='contained' color='info' size='large' onClick={()=>handleNav("Orders")}>Orders</Button>
+    <Box display={"flex"} position={"relative"} flexDirection={"column"} alignItems={"center"} padding='30px 50px'>
+        <Box display={"flex"} gap={2} >
+            <Button variant='contained' color={nav=='Products'?'success':'info'} size='large' onClick={()=>handleNav(nav)}>Product</Button>
+            <Button variant='contained' color={nav=='Orders'?'success':'info'} size='large' onClick={()=>handleNav(nav)}>Orders</Button>
+            {nav==='Products' && <Button variant='contained' color='info' onClick={()=>getUpdatedPizzaID(null,null,"Create")} >Add Product</Button>}
         </Box>
        <Box width={"50rem"} mt={5}>
         <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 500 }}  aria-label="simple table">
                     <TableHead>
-                    {nav =='Products' && <TableRow>
+                    {nav =='Products' && 
+                    <TableRow>
                         <TableCell align="right">Image</TableCell>
                         <TableCell align="right">Title</TableCell>
                         <TableCell align="right">Price</TableCell>
@@ -87,7 +106,7 @@ const index = ({products,oreders}) => {
                     }
                     </TableHead>
                     <TableBody>
-                            { nav =='Products' && pizzaList.map((pizza)=>(
+                            { nav =='Products' && pizzaList.map((pizza,index)=>(
                             <TableRow key={pizza._id}>
                                 <TableCell align="right">
                                     <Image src={pizza.img} width={50} height={50} />
@@ -99,7 +118,7 @@ const index = ({products,oreders}) => {
                                     ${pizza.prices[0]}
                                 </TableCell>
                                 <TableCell align="right" >
-                                    <Button  size="small" variant='contained' color='success'>Edit</Button>
+                                    <Button  size="small" variant='contained' color='success' onClick={()=>getUpdatedPizzaID(pizza._id,index,"Update")}>Edit</Button>
                                     <Button  size="small" sx={{ml:1}} variant='contained' color='error' onClick={()=>handleDeleteProduct(pizza._id)}>Delete</Button>
                                 </TableCell>
                                 </TableRow>
@@ -127,13 +146,14 @@ const index = ({products,oreders}) => {
                 </Table>
             </TableContainer>
         </Box>
+        {close && <AddProductModal pizzaId={pizza_Id_To_Update} pizzaIndex={pizza_index_To_Update} pizza={pizzaList[pizza_index_To_Update]} action={action} close={close} setClose={setClose} />}
     </Box>
   )
 }
 
 export const getServerSideProps = async (ctx)=>{
     const myCookie = ctx.req?.cookies || ""
-    if(myCookie.token !== process.env.TOKEN){
+    if(myCookie.token != process.env.TOKEN){
       return{
         redirect:{
           destination:"/admin/login",

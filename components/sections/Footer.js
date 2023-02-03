@@ -1,7 +1,7 @@
 import { Box, Container, Typography, useTheme } from '@mui/material'
 import Image from 'next/image'
 import React from 'react'
-import {bg} from '../public/img/index'
+import {bg} from '../../public/img/index'
 
 const Footer = () => {
   const theme = useTheme()

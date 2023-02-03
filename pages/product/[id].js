@@ -11,10 +11,11 @@ const Product = ({pizza}) => {
     const theme = useTheme()
     const dispatch = useDispatch() 
 
-    const [size, setSize] = useState(0);
-    const [price, setPrice] = useState(pizza.prices[size]); 
-    const [extras, setExtras] = useState([]);
-    const [quantity, setQuantity] = useState(1);
+    const [size, setSize] = useState(0)
+    const [price, setPrice] = useState(pizza.prices[size]);
+    const [extras, setExtras] = useState([])
+    const [quantity, setQuantity] = useState(1)
+    const pizzaSize = ["Small","Medium","Large"]
 
     const product ={
         id:pizza._id,
@@ -29,7 +30,7 @@ const Product = ({pizza}) => {
     }
 
     const addProduct = ()=>{
-      dispatch(addNewProduct({product,extras,price,quantity}))
+      dispatch(addNewProduct({product}))
     }
 
     const changePrice= (number)=>{
@@ -56,30 +57,32 @@ const Product = ({pizza}) => {
 
 
   return (
-    <Box height={{xs:"auto",md:"calc(100vh - 100px)"}} display={"flex"} flexDirection={{xs:"column",md:"row"}}>
+    <Box height={{xs:"auto",md:"calc(100vh - 100px)"}} display={"flex"} flexDirection={{xs:"column",sm:"row"}}>
         <Box height={"100%"} flex={1} display={"flex"} justifyContent="center" alignItems="center">
-            <Box position={"relative"} height={"70%"} width={"70%"}>
-                <Image src={pizza.img}  alt='pizza' fill style={{objectFit:"contain"}} />
-            </Box>
+                <Box padding={2}>
+                    <Image src={pizza.img}  alt='pizza' height={300} width={300}  style={{objectFit:"contain"}} />
+                </Box>
         </Box>
 
-        <Box height={"100%"} flex={1} padding="20px">
+        <Box height={"100%"} flex={1} padding="20px" display={"flex"} flexDirection={"column"} justifyContent="center" >
             <Typography variant='h1' fontWeight={"bold"}>{pizza.title}</Typography>
-            <Typography variant='span' fontSize={"24px"} color={"#d1411e"} display={"block"} my={1}  >${price}</Typography>
+            <Typography variant='span' fontSize={"24px"} color={"#d1411e"} display={"block"} my={1}  >${parseFloat(price.toFixed(2))}</Typography>
             <Typography  my={1} color={theme.palette.grey[800]}>{pizza.desc}</Typography>
             <Typography variant='h4' my={2}>Choose the size</Typography>
 
             <Box display={"flex"} width={"50%"} justifyContent="space-between" alignItems="center" >
-                <SizeButton h={"30px"} w={"30px"} img={PizzaSize} title={"Small"} click={()=>handlSize(0)} />
-                <SizeButton h={"40px"} w={"40px"} img={PizzaSize} title={"Medium"} click={()=>handlSize(1)} />
-                <SizeButton h={"50px"} w={"50px"} img={PizzaSize} title={"Large"} click={()=>handlSize(2)} />
+                {
+                    pizza.prices.map((price,index)=>(
+                        <SizeButton h={`${30+(index*10)}px`} w={`${30+(index*10)}px`} img={PizzaSize} title={pizzaSize[index]} click={()=>handlSize(index)} />
+                    ))
+                }
             </Box>
 
             <Typography variant='h4' my={2}>Choose additional ingredients</Typography>
 
             <Box display={"flex"} gap={2} alignItems="center" >
                 {
-                    pizza.extraOption.map((extra)=>(
+                    pizza.extraOptions.map((extra)=>(
                         <FormControlLabel key={extra._id} control={<Checkbox value={extra.text} onChange={(e)=>handlChange(e,extra)} />} label={extra.text} />
                     ))
                 }

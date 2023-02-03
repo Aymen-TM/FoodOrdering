@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { useRouter } from 'next/navigation';
 import { reset } from '../redux/cartSlice'
-import CashDetailedModal from '../components/CashDetailedModal';
+import CashDetailedModal from '../components/modals/CashDetailedModal';
 
 
 
@@ -40,7 +40,7 @@ const Cart = () => {
     }
 
     // This values are the props in the UI
-const style = {"layout":"vertical"};
+const style = {"layout":"horizontal"};
 const currency = "USD";
 
 // Custom component to wrap the PayPalButtons and handle currency changes
@@ -111,15 +111,15 @@ const ButtonWrapper = ({ currency, showSpinner ,amount}) => {
  
   return (
     <Box display={"flex"} flexDirection={{xs:"column",md:"row"}} padding={"50px"}>
-        <Box flex={2}>
+        <Box flex={2} overflow={"auto"}>
             <TableContainer component={Paper}  >
                 <Table sx={{ minWidth: 650 }} size="small" aria-label="simple table">
                     <TableHead >
-                    <TableRow>
-                        {
-                         tableHead.map((title)=><TableCell key={title} align="left" sx={{fontWeight:"bold" ,fontSize:"16px"}}>{title}</TableCell>)
-                        }
-                    </TableRow>
+                        <TableRow>
+                            {
+                            tableHead.map((title)=><TableCell key={title} align="left" sx={{fontWeight:"bold" ,fontSize:"16px"}}>{title}</TableCell>)
+                            }
+                        </TableRow>
                     </TableHead>
                     <TableBody>
                         {
@@ -137,13 +137,13 @@ const ButtonWrapper = ({ currency, showSpinner ,amount}) => {
                             {item.options.map((option)=><Typography key={option._id}>{option.text}</Typography> )}
                             </TableCell>
                             <TableCell align="left" >
-                            {item.price}
+                            {parseFloat(item.price.toFixed(2)) }
                             </TableCell>
                             <TableCell align="left">
                             {item.quantity}
                             </TableCell>
                             <TableCell align="left">
-                            {item.totalPrice}
+                            {parseFloat(item.totalPrice.toFixed(2))}
                             </TableCell>
                         </TableRow>
                         ))
@@ -154,39 +154,39 @@ const ButtonWrapper = ({ currency, showSpinner ,amount}) => {
             </TableContainer>
         </Box>
 
-        <Box flex={1} padding={"20px"}>
+        <Box flex={1}>
             <Box  bgcolor={palette.grey[800]} gap={2} padding={"20px 50px 50px 50px"} maxHeight={"300px"} width={"90%"} display={"flex"} flexDirection={"column"}>
                 <Typography variant='h3' fontWeight={"bold"} color={"white"}>CART TOTAL</Typography>
                 <Box>
                     <Box>
-                        <Typography variant='body1' color={"white"}>Subtotal: $79.60</Typography>
+                        <Typography variant='body1' color={"white"}>Subtotal: $0.00</Typography>
                     </Box>
                     <Box>
                         <Typography variant='body1' color={"white"}>Discount: $0.00</Typography>
                     </Box>
                     <Box>
-                        <Typography variant='body1' color={"white"}>Total: ${total}</Typography>
+                        <Typography variant='body1' color={"white"}>Total: ${parseFloat(total.toFixed(2))}</Typography>
                     </Box>
                 </Box>
                 {checkOut ? (
                     <Stack direction={"column"} gap={1}>
                         <Button variant='outlined' color='secondary'  onClick={()=>setCashDetailed(!cashDetailed)} disableElevation  fullWidth >CASH ON DELIVERY</Button>
                         <PayPalScriptProvider
-                        options={{
-                            "client-id": "AVUbZdm0kTDD61yD3JRNV1NUzWhFvMW6921T3mdeU5-BYn4YNIJmW9buQnp2b4o-vMItZfUIky3Mc10p",
-                            components: "buttons",
-                            currency: "USD",
-                            "disable-funding":"credit,card,p24"
-                        }}
-                    >
-                        <ButtonWrapper currency={currency} showSpinner={false} amount={total}  />
-                    </PayPalScriptProvider>
+                            options={{
+                                "client-id": "AVUbZdm0kTDD61yD3JRNV1NUzWhFvMW6921T3mdeU5-BYn4YNIJmW9buQnp2b4o-vMItZfUIky3Mc10p",
+                                components: "buttons",
+                                currency: "USD",
+                                "disable-funding":"credit,card,p24"
+                            }}
+                        >
+                            <ButtonWrapper currency={currency} showSpinner={false} amount={total}  />
+                        </PayPalScriptProvider>
                 </Stack>
                 ):(<Button variant='contained' disableElevation onClick={()=>setCheckOut(!checkOut)} >CHECKOUT NOW!</Button>)
                 }
             </Box>
         </Box>
-        {cashDetailed && <CashDetailedModal total={total} createOrder={createOrder} />}
+        {cashDetailed && <CashDetailedModal total={total} createOrder={createOrder} setCashDetailed={()=>setCashDetailed()} cashDetailed={cashDetailed} />}
     </Box>
   )
 }

@@ -1,17 +1,25 @@
 import { Box, Button, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
+import { useRef } from 'react'
 
-const CashDetailedModal = ({total,createOrder}) => {
+const CashDetailedModal = ({total,createOrder,setCashDetailed,cashDetailed}) => {
     const [name, setName] = useState("")
     const [phone, setPhone] = useState("")
     const [address, setAddress] = useState("")
+    const wrapper = useRef(null)
     const handleClick= ()=>{
         createOrder({customer:name,address,total,method:0})
+        setCashDetailed(!cashDetailed)
+    }
+    const handlClickOut =(e)=>{
+        if(e.target != wrapper.current){
+            setCashDetailed(!cashDetailed)
+        }
     }
   return (
-    <Box position={"absolute"} display={"flex"} justifyContent={"center"} alignItems={"center"} zIndex={999}  bgcolor={"rgba(197, 197, 197, 0.568)"} top={0} left={0} height={"100vh"} width={"100%"}>
-        <Box display={"flex"} gap={2} borderRadius={"20px"} flexDirection={"column"} padding={"50px"} justifyContent={"center"} alignItems={"center"} bgcolor={"white"} width={"35rem"} >
-            <Typography variant='h2'>you will pay {total} after delivery.</Typography>
+    <Box position={"absolute"} display={"flex"} justifyContent={"center"} alignItems={"center"} zIndex={999}  bgcolor={"rgba(197, 197, 197, 0.568)"} top={0} left={0} height={"100vh"} width={"100%"} onClick={(e)=>handlClickOut(e)}>
+        <Box display={"flex"} ref={wrapper} gap={2} borderRadius={"20px"} flexDirection={"column"} padding={"50px"} justifyContent={"center"} alignItems={"center"} bgcolor={"white"} width={"35rem"} >
+            <Typography variant='h2'>Payment on delivery.</Typography>
             <Box width={"100%"}>
                 <TextField value={name} label="Customer name" placeholder="Name" color="info" focused fullWidth onChange={(e)=>setName(e.target.value)} />
             </Box>

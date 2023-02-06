@@ -28,9 +28,13 @@ const NavBar = () => {
 
       {isNotMobileScreen &&
       <Stack flex={3} flexDirection={"row"} alignItems={"center"}  >
-        <Button color={"neutral"} sx={{fontSize:"20px"}} onClick={()=>router.push('/')} >Home</Button>
-        <Button color={"neutral"} sx={{fontSize:"20px"}} onClick={()=>router.push('/')} >Menu</Button>
-        <Button color={"neutral"} sx={{fontSize:"20px"}} onClick={()=>router.push('/')} >Contact</Button>
+        <Button  color={"neutral"} sx={{fontSize:"15px"}} onClick={()=>router.push('/')} >Home</Button>
+        <Button color={"neutral"} sx={{fontSize:"15px"}} onClick={()=>router.push('/')} >Products</Button>
+        <Button color={"neutral"} sx={{fontSize:"15px"}} onClick={()=>router.push('/')} >Menu</Button>
+        <Button color={"neutral"} sx={{fontSize:"15px"}} onClick={()=>router.push('/')} >Events</Button>
+        <Button color={"neutral"} sx={{fontSize:"15px"}} onClick={()=>router.push('/')} >Blog</Button>
+        <Button color={"neutral"} sx={{fontSize:"15px"}} onClick={()=>router.push('/')} >Contaict</Button>
+
 
       </Stack>
       }

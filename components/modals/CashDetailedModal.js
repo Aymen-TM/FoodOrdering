@@ -12,13 +12,13 @@ const CashDetailedModal = ({total,createOrder,setCashDetailed,cashDetailed}) => 
         setCashDetailed(!cashDetailed)
     }
     const handlClickOut =(e)=>{
-        if(e.target != wrapper.current){
+        if(e.target == wrapper.current){
             setCashDetailed(!cashDetailed)
         }
     }
   return (
-    <Box position={"absolute"} display={"flex"} justifyContent={"center"} alignItems={"center"} zIndex={999}  bgcolor={"rgba(197, 197, 197, 0.568)"} top={0} left={0} height={"100vh"} width={"100%"} onClick={(e)=>handlClickOut(e)}>
-        <Box display={"flex"} ref={wrapper} gap={2} borderRadius={"20px"} flexDirection={"column"} padding={"50px"} justifyContent={"center"} alignItems={"center"} bgcolor={"white"} width={"35rem"} >
+    <Box position={"absolute"} ref={wrapper} display={"flex"} justifyContent={"center"} alignItems={"center"} zIndex={999}  bgcolor={"rgba(197, 197, 197, 0.568)"} top={0} left={0} height={"100vh"} width={"100%"} onClick={(e)=>handlClickOut(e)}>
+        <Box display={"flex"}  gap={2} borderRadius={"20px"} flexDirection={"column"} padding={"50px"} justifyContent={"center"} alignItems={"center"} bgcolor={"white"} width={"35rem"} >
             <Typography variant='h2'>Payment on delivery.</Typography>
             <Box width={"100%"}>
                 <TextField value={name} label="Customer name" placeholder="Name" color="info" focused fullWidth onChange={(e)=>setName(e.target.value)} />

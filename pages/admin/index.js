@@ -28,9 +28,11 @@ const index = ({products,oreders}) => {
 
     const handleDeleteProduct = async (id) => {
         try {
-          const res = await axios.delete(
+          await axios.delete(
             "http://localhost:3000/api/products/" + id
           );
+
+
           setPizzaList(pizzaList.filter((pizza) => pizza._id !== id));
         } catch (err) {
           console.log(err);
@@ -91,10 +93,10 @@ const index = ({products,oreders}) => {
                     <TableHead>
                     {nav =='Products' && 
                     <TableRow>
-                        <TableCell align="right">Image</TableCell>
-                        <TableCell align="right">Title</TableCell>
-                        <TableCell align="right">Price</TableCell>
-                        <TableCell align="right">Action</TableCell>
+                        <TableCell align="right" sx={{fontWeight:"bold" ,fontSize:"16px"}}>Image</TableCell>
+                        <TableCell align="right" sx={{fontWeight:"bold" ,fontSize:"16px"}}>Title</TableCell>
+                        <TableCell align="right" sx={{fontWeight:"bold" ,fontSize:"16px"}}>Price</TableCell>
+                        <TableCell align="right" sx={{fontWeight:"bold" ,fontSize:"16px"}}>Action</TableCell>
                     </TableRow>}
                     {nav =='Orders' && <TableRow>
                         <TableCell align="right">Customer</TableCell>
@@ -106,7 +108,7 @@ const index = ({products,oreders}) => {
                     }
                     </TableHead>
                     <TableBody>
-                            { nav =='Products' && pizzaList.map((pizza,index)=>(
+                            { nav =='Products' && pizzaList && pizzaList.map((pizza,index)=>(
                             <TableRow key={pizza._id}>
                                 <TableCell align="right">
                                     <Image src={pizza.img} width={50} height={50} />
@@ -146,7 +148,7 @@ const index = ({products,oreders}) => {
                 </Table>
             </TableContainer>
         </Box>
-        {close && <AddProductModal pizzaId={pizza_Id_To_Update} pizzaIndex={pizza_index_To_Update} pizza={pizzaList[pizza_index_To_Update]} action={action} close={close} setClose={setClose} />}
+        {close && <AddProductModal pizzaId={pizza_Id_To_Update} pizzaIndex={pizza_index_To_Update} pizza={pizzaList[pizza_index_To_Update]} setPizzaList={()=>setPizzaList()} action={action} close={close} setClose={setClose} />}
     </Box>
   )
 }

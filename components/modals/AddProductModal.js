@@ -3,8 +3,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
-const AddProductModal = ({pizzaId,pizzaIndex,pizza,action,total,createOrder,close,setClose}) => {
+const AddProductModal = ({pizzaId,pizzaIndex,pizza,action,close,setClose}) => {
     const [file, setFile] = useState(null);
     const [title, setTitle] = useState(null);
     const [desc, setDesc] = useState(null);
@@ -12,8 +13,9 @@ const AddProductModal = ({pizzaId,pizzaIndex,pizza,action,total,createOrder,clos
     const [extraOptions, setExtraOptions] = useState([]);
     const [extra, setExtra] = useState(null);
 
-    const wrapper=useRef(null)
 
+    const wrapper=useRef(null)
+    const route = useRouter()
     const theme = useTheme()
 
     useEffect(() => {
@@ -23,7 +25,7 @@ const AddProductModal = ({pizzaId,pizzaIndex,pizza,action,total,createOrder,clos
         setPrices([...pizza.prices])
         setExtraOptions([...pizza.extraOptions])
       }
-    }, [pizza])
+    }, [])
     
 
 
@@ -44,7 +46,7 @@ const AddProductModal = ({pizzaId,pizzaIndex,pizza,action,total,createOrder,clos
         setPrices(currentPrices);
     };
 
-    const handleEditProduct = async (id,index) => {
+    const handleEditProduct = async (id) => {
       const data = new FormData();
       const UpdatedProduct = {
         title,
@@ -63,14 +65,12 @@ const AddProductModal = ({pizzaId,pizzaIndex,pizza,action,total,createOrder,clos
           const { url } = uploadRes.data;
           UpdatedProduct.img = url
         }
- 
-
         const res = await axios.patch(
           "http://localhost:3000/api/products/" + id,
           UpdatedProduct
         );
-        setPizzaList(pizzaList.splice(index,1,res.data));
-        setClose(!close)
+        route.reload(window.location.pathname)
+        
       } catch (err) {
         console.log(err);
       }
@@ -86,7 +86,7 @@ const AddProductModal = ({pizzaId,pizzaIndex,pizza,action,total,createOrder,clos
             data
           );
     
-          const { url } = uploadRes.data;
+          const { url } = await uploadRes.data;
           const newProduct = {
             title,
             desc,
@@ -97,7 +97,7 @@ const AddProductModal = ({pizzaId,pizzaIndex,pizza,action,total,createOrder,clos
          
     
         await axios.post("http://localhost:3000/api/products", newProduct);
-        setClose(!close)
+        route.reload(window.location.pathname)
         } catch (err) {
           console.log(err);
         }
@@ -143,9 +143,9 @@ const AddProductModal = ({pizzaId,pizzaIndex,pizza,action,total,createOrder,clos
                     />
             </Box>
             <Box width={"100%"} display={"flex"} justifyContent={"center"} alignItems={"center"} gap={1}>
-                <TextField value={prices[0]} InputProps={{startAdornment: (<InputAdornment position="start"><AttachMoneyIcon /></InputAdornment>),}}  onChange={(e)=>changePrice(e,0)} label="Small" placeholder="Small" type={"number"}  color="info" focused  />
-                <TextField value={prices[1]} InputProps={{startAdornment: (<InputAdornment position="start"><AttachMoneyIcon /></InputAdornment>),}}  onChange={(e)=>changePrice(e,1)} label="Medium" placeholder="Medium" type={"number"}  color="info" focused   />
-                <TextField value={prices[2]} InputProps={{startAdornment: (<InputAdornment position="start"><AttachMoneyIcon /></InputAdornment>),}}  onChange={(e)=>changePrice(e,2)} label="Large" placeholder="Large" type={"number"}  color="info" focused  />
+                <TextField  InputProps={{startAdornment: (<InputAdornment position="start"><AttachMoneyIcon /></InputAdornment>),}}  onChange={(e)=>changePrice(e,0)} label="Small" placeholder="Small" type={"number"}  color="info" focused  />
+                <TextField  InputProps={{startAdornment: (<InputAdornment position="start"><AttachMoneyIcon /></InputAdornment>),}}  onChange={(e)=>changePrice(e,1)} label="Medium" placeholder="Medium" type={"number"}  color="info" focused   />
+                <TextField  InputProps={{startAdornment: (<InputAdornment position="start"><AttachMoneyIcon /></InputAdornment>),}}  onChange={(e)=>changePrice(e,2)} label="Large" placeholder="Large" type={"number"}  color="info" focused  />
             </Box>
             <Box width={"100%"} display={"flex"} alignItems={"center"} gap={1}>
                 <TextField  label="Extra Name" name='text' placeholder="Extra Name" type={"text"} onChange={(e)=>handleExtraInput(e)}  color="info" focused   />

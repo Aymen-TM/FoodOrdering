@@ -168,8 +168,7 @@ const ButtonWrapper = ({ currency, showSpinner ,amount}) => {
                         <Typography variant='body1' color={"white"}>Total: ${parseFloat(total.toFixed(2))}</Typography>
                     </Box>
                 </Box>
-                {checkOut ? (
-                    <Stack direction={"column"} gap={1}>
+                <Stack direction={"column"} gap={1}>
                         <Button variant='outlined' color='secondary'  onClick={()=>setCashDetailed(!cashDetailed)} disableElevation  fullWidth >CASH ON DELIVERY</Button>
                         <PayPalScriptProvider
                             options={{
@@ -182,8 +181,8 @@ const ButtonWrapper = ({ currency, showSpinner ,amount}) => {
                             <ButtonWrapper currency={currency} showSpinner={false} amount={total}  />
                         </PayPalScriptProvider>
                 </Stack>
-                ):(<Button variant='contained' disableElevation onClick={()=>setCheckOut(!checkOut)} >CHECKOUT NOW!</Button>)
-                }
+                
+                
             </Box>
         </Box>
         {cashDetailed && <CashDetailedModal total={total} createOrder={createOrder} setCashDetailed={()=>setCashDetailed()} cashDetailed={cashDetailed} />}

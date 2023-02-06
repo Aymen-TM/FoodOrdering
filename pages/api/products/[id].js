@@ -16,17 +16,16 @@ export default async function handler(req,res) {
      try{
         const pizza = await Product.findByIdAndUpdate(id,req.body)
             
-        res.status(200).json(pizza)
         res.status(200).json({
             success: true,
-            message: 'Document deleted successfully',
+            message: 'Document updated successfully',
             pizza
           });
           
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: 'Error deleting document',
+            message: 'Error updating document',
             error: error
           });
     }
@@ -37,7 +36,6 @@ export default async function handler(req,res) {
         try {
             const pizza = await Product.findByIdAndDelete(id)
             
-            res.status(200).json(pizza)
             res.status(200).json({
                 success: true,
                 message: 'Document deleted successfully',

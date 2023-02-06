@@ -23,10 +23,10 @@ const Order = ({order}) => {
                 <Table sx={{ minWidth: 650 }} size="small" aria-label="simple table">
                     <TableHead>
                     <TableRow>
-                        <TableCell align="left"> Order ID</TableCell>
-                        <TableCell align="left">Customer</TableCell>
-                        <TableCell align="left">Address</TableCell>
-                        <TableCell align="left">Total</TableCell>
+                        <TableCell align="left" sx={{fontWeight:"bold" ,fontSize:"16px"}}> Order ID</TableCell>
+                        <TableCell align="left" sx={{fontWeight:"bold" ,fontSize:"16px"}}>Customer</TableCell>
+                        <TableCell align="left" sx={{fontWeight:"bold" ,fontSize:"16px"}}>Address</TableCell>
+                        <TableCell align="left" sx={{fontWeight:"bold" ,fontSize:"16px"}}>Total</TableCell>
                     </TableRow>
                     </TableHead>
                     <TableBody>
@@ -41,7 +41,7 @@ const Order = ({order}) => {
                             {order.address}
                             </TableCell>
                             <TableCell align="left" >
-                            {order.total}
+                            {order.total.toFixed(2)}
                             </TableCell>
                         </TableRow>
                         
@@ -64,7 +64,7 @@ const Order = ({order}) => {
                 <Typography variant='h3' fontWeight={"bold"} color={"white"}>CART TOTAL</Typography>
                 <Box>
                     <Box>
-                        <Typography variant='body1' color={"white"}>Subtotal: $79.60</Typography>
+                        <Typography variant='body1' color={"white"}>Subtotal: $0.00</Typography>
                     </Box>
                     <Box>
                         <Typography variant='body1' color={"white"}>Discount: $0.00</Typography>

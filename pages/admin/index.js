@@ -99,11 +99,11 @@ const index = ({products,oreders}) => {
                         <TableCell align="right" sx={{fontWeight:"bold" ,fontSize:"16px"}}>Action</TableCell>
                     </TableRow>}
                     {nav =='Orders' && <TableRow>
-                        <TableCell align="right">Customer</TableCell>
-                        <TableCell align="right">Total</TableCell>
-                        <TableCell align="right">Payment</TableCell>
-                        <TableCell align="right">Status</TableCell>
-                        <TableCell align="right">Action</TableCell>
+                        <TableCell align="right" sx={{fontWeight:"bold" ,fontSize:"16px"}}>Customer</TableCell>
+                        <TableCell align="right" sx={{fontWeight:"bold" ,fontSize:"16px"}}>Total</TableCell>
+                        <TableCell align="right" sx={{fontWeight:"bold" ,fontSize:"16px"}}>Payment</TableCell>
+                        <TableCell align="right" sx={{fontWeight:"bold" ,fontSize:"16px"}}>Status</TableCell>
+                        <TableCell align="right" sx={{fontWeight:"bold" ,fontSize:"16px"}}>Action</TableCell>
                     </TableRow>
                     }
                     </TableHead>
@@ -132,7 +132,7 @@ const index = ({products,oreders}) => {
                                     {order.customer}
                                     </TableCell>
                                     <TableCell align="right">
-                                    ${order.total}
+                                    ${order.total.toFixed(2)}
                                     </TableCell>
                                     <TableCell align="right">
                                     {order.method === 0 ? <span>cash</span> : <span>paid</span>}
